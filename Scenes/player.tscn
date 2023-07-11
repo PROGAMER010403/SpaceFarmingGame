@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://durlojbj3xq6h"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_5aix3"]
+[ext_resource type="Texture2D" uid="uid://b0m8nw8kjo73x" path="res://Assets/Sprites/icon.svg" id="2_sn23d"]
+[ext_resource type="PackedScene" uid="uid://be0bxra4qmnsx" path="res://Scenes/zooming_camera_2d.tscn" id="3_1nekc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4fq4"]
+size = Vector2(118, 120)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_5aix3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sn23d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o4fq4")
+
+[node name="ZoomingCamera2D" parent="." instance=ExtResource("3_1nekc")]
+maxZoomLevel = 1.0
+minZoomLevel = 0.2
