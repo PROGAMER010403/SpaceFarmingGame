@@ -1,6 +1,6 @@
 extends Camera2D
 
-@onready var ZoomAnimatorObject = $ZoomAnimatorObject
+@onready var ZoomAnimatorObject = $ZoomAnimator
 
 @export var maxZoomLevel : float
 @export var minZoomLevel : float
