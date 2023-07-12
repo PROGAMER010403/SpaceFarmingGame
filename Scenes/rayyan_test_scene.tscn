@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8njseudfhckb"]
+
+[ext_resource type="Script" path="res://Scripts/ModularBuilding.gd" id="1_lve4w"]
+[ext_resource type="PackedScene" uid="uid://durlojbj3xq6h" path="res://Prefabs/player.tscn" id="1_sjeir"]
+[ext_resource type="PackedScene" uid="uid://di0r7vye68keg" path="res://Prefabs/core_module.tscn" id="2_ucc5e"]
+[ext_resource type="Script" path="res://Scripts/BuildUI.gd" id="4_nx73b"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(0, 323)
+script = ExtResource("1_lve4w")
+
+[node name="Player" parent="." instance=ExtResource("1_sjeir")]
+
+[node name="CoreModule" parent="." instance=ExtResource("2_ucc5e")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BuildUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 993.0
+offset_top = 29.0
+offset_right = 993.0
+offset_bottom = 29.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("4_nx73b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BuildUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 135.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FarmingModule" type="Button" parent="CanvasLayer/BuildUI/VBoxContainer"]
+layout_mode = 2
+text = "Farming Module"
+
+[node name="TurretModule1" type="Button" parent="CanvasLayer/BuildUI/VBoxContainer"]
+layout_mode = 2
+text = "Turret Module 1"
+
+[connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/FarmingModule" to="CanvasLayer/BuildUI" method="_on_farming_module_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/TurretModule1" to="CanvasLayer/BuildUI" method="_on_turret_module_1_pressed"]
