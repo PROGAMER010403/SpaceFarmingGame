@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkfxjkilrl8s"]
+
+[ext_resource type="Texture2D" uid="uid://b0m8nw8kjo73x" path="res://Assets/Sprites/icon.svg" id="1_hva2i"]
+[ext_resource type="PackedScene" uid="uid://c80nprnb5fisk" path="res://Scenes/enemy.tscn" id="2_02s8y"]
+[ext_resource type="PackedScene" uid="uid://d27ye4qfdlfd3" path="res://android.tscn" id="3_r643j"]
+[ext_resource type="PackedScene" uid="uid://ng2gqbgn6s14" path="res://Scenes/bullet.tscn" id="4_tmvc5"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(589, 287)
+texture = ExtResource("1_hva2i")
+
+[node name="android" parent="." instance=ExtResource("3_r643j")]
+position = Vector2(-444, -13)
+
+[node name="bullet" parent="." instance=ExtResource("4_tmvc5")]
+position = Vector2(-128, -147)
+
+[node name="bullet2" parent="." instance=ExtResource("4_tmvc5")]
+position = Vector2(-284, -145)
+
+[node name="enemy" parent="." instance=ExtResource("2_02s8y")]
+position = Vector2(179, 3)
