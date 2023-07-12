@@ -1,10 +1,11 @@
 extends Node
 
 #Change these variables from other scripts or systems
-@export var ZOOM_OUT_STATE : bool = false #false means zoomed in, true means zoomed out
+@export var ZOOM_OUT_STATE : bool = true #false means zoomed in, true means zoomed out
 
 #Following are empty variables, waiting for their corresponding objects to assign themselves upon ready
 var ZoomingCameraObject : Object
+var CurrentModuleAtMouse : Object
 
 #Do not change these variables externally, these are used for optimization purposes to avoid constant update checks in dependant scripts
 var isZoomStateJustChanged : bool = false
