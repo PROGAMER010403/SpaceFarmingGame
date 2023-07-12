@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=3 uid="uid://di0r7vye68keg"]
+
+[ext_resource type="Texture2D" uid="uid://b0m8nw8kjo73x" path="res://Assets/Sprites/icon.svg" id="1_0t05c"]
+[ext_resource type="Script" path="res://Scripts/ModuleLocalStateManager.gd" id="1_ancuf"]
+
+[sub_resource type="Animation" id="Animation_nxda5"]
+resource_name = "Fade_In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(3, 3, 2.34902, 0), Color(3, 3, 2.35, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pjwhw"]
+resource_name = "Fade_Out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(3, 3, 2.35, 1), Color(3, 3, 2.34902, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_br484"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(3, 3, 2.34902, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_862j0"]
+_data = {
+"Fade_In": SubResource("Animation_nxda5"),
+"Fade_Out": SubResource("Animation_pjwhw"),
+"RESET": SubResource("Animation_br484")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2n0ox"]
+size = Vector2(108, 106)
+
+[node name="CoreModule" type="Node2D"]
+script = ExtResource("1_ancuf")
+
+[node name="Container" type="Node2D" parent="."]
+
+[node name="Room" type="Sprite2D" parent="Container"]
+modulate = Color(2.5, 2.5, 4, 1)
+z_index = -1
+scale = Vector2(7.75, 3.07813)
+texture = ExtResource("1_0t05c")
+
+[node name="Wall" type="Sprite2D" parent="Container"]
+modulate = Color(3, 3, 2.34902, 0)
+z_index = 1
+rotation = -3.14159
+scale = Vector2(7.75, 3.07813)
+texture = ExtResource("1_0t05c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Container/Wall"]
+libraries = {
+"": SubResource("AnimationLibrary_862j0")
+}
+
+[node name="LeftEnd" type="Marker2D" parent="Container"]
+z_index = 2
+position = Vector2(-496, 0)
+
+[node name="Area2D" type="Area2D" parent="Container/LeftEnd"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Container/LeftEnd/Area2D"]
+shape = SubResource("RectangleShape2D_2n0ox")
+
+[node name="Sprite2D" type="Sprite2D" parent="Container/LeftEnd"]
+modulate = Color(0.639216, 0.92549, 0, 1)
+scale = Vector2(0.40625, 0.40625)
+texture = ExtResource("1_0t05c")
+
+[node name="RightEnd" type="Marker2D" parent="Container"]
+z_index = 2
+position = Vector2(496, 0)
+
+[node name="Area2D" type="Area2D" parent="Container/RightEnd"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Container/RightEnd/Area2D"]
+shape = SubResource("RectangleShape2D_2n0ox")
+
+[node name="Sprite2D" type="Sprite2D" parent="Container/RightEnd"]
+modulate = Color(0.639216, 0.92549, 0, 1)
+scale = Vector2(0.40625, 0.40625)
+texture = ExtResource("1_0t05c")
+
+[connection signal="mouse_entered" from="Container/LeftEnd/Area2D" to="." method="_on_mouse_entered_left_end"]
+[connection signal="mouse_exited" from="Container/LeftEnd/Area2D" to="." method="_on_mouse_exited_left_area"]
+[connection signal="mouse_entered" from="Container/RightEnd/Area2D" to="." method="_on_mouse_entered_right_end"]
+[connection signal="mouse_exited" from="Container/RightEnd/Area2D" to="." method="_on_mouse_exited_right_end"]
