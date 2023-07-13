@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c80nprnb5fisk"]
+[gd_scene load_steps=23 format=3 uid="uid://bof5vya65ch4h"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_33dtn"]
 [ext_resource type="Texture2D" uid="uid://d13gcp1g5cxwl" path="res://Assets/Sprite-Sheets/OrangeEnemyAttackingAnimation.png" id="2_msvp6"]
@@ -150,7 +150,7 @@ value = 50.0
 show_percentage = false
 
 [node name="player_detector" type="Area2D" parent="."]
-position = Vector2(-44, 7)
+position = Vector2(59, 22)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_detector"]
 position = Vector2(-77, -9)
