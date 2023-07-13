@@ -5,9 +5,9 @@ extends Node2D
 var FarmingModulePrefab = preload("res://Prefabs/farming_module.tscn")
 var Turret1ModulePrefab = preload("res://Prefabs/turret_1_module.tscn")
 
-var Enemy1Prefab = preload("res://Prefabs/enemy_1_placeholder.tscn")
-var Enemy2Prefab = preload("res://Prefabs/enemy_2_placeholder.tscn")
-var Enemy3Prefab = preload("res://Prefabs/enemy_3_placeholder.tscn")
+var Enemy1Prefab = preload("res://Prefabs/enemy1.tscn")
+var Enemy2Prefab = preload("res://Prefabs/enemy2.tscn")
+var Enemy3Prefab = preload("res://Prefabs/enemy3.tscn")
 
 func _ready():
 	$CoreModule.MODULE_STATE = 3
@@ -62,5 +62,6 @@ func instantiate_enemy(enemyIndex, spawnPosition):
 	elif enemyIndex == 3:
 		newEnemy1Instance = Enemy3Prefab.instantiate()
 	
-	newEnemy1Instance.global_position = spawnPosition
+	newEnemy1Instance.global_position = Vector2 (spawnPosition.x, 65)
+	newEnemy1Instance.name = "Type" + str(enemyIndex) + "Enemy"
 	RootNode.add_child(newEnemy1Instance)

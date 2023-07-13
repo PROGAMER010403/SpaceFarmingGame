@@ -1,76 +1,73 @@
-[gd_scene load_steps=23 format=3 uid="uid://bof5vya65ch4h"]
+[gd_scene load_steps=22 format=3 uid="uid://tgtprld7nea4"]
 
-[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_33dtn"]
-[ext_resource type="Texture2D" uid="uid://d13gcp1g5cxwl" path="res://Assets/Sprite-Sheets/OrangeEnemyAttackingAnimation.png" id="2_msvp6"]
-[ext_resource type="Texture2D" uid="uid://bdcx2ybpqmlml" path="res://Assets/Sprite-Sheets/OrangeEnemyWalkingAnimation.png" id="3_ms4r7"]
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_gkqqm"]
+[ext_resource type="Texture2D" uid="uid://d13gcp1g5cxwl" path="res://Assets/Sprite-Sheets/OrangeEnemyAttackingAnimation.png" id="2_kgxmt"]
+[ext_resource type="Texture2D" uid="uid://bdcx2ybpqmlml" path="res://Assets/Sprite-Sheets/OrangeEnemyWalkingAnimation.png" id="3_rcy6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3j1n4"]
 size = Vector2(184, 158)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_js5op"]
-size = Vector2(111.5, 113)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5igw8"]
-size = Vector2(127, 128)
+size = Vector2(23.5, 143.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_27lpq"]
-atlas = ExtResource("2_msvp6")
+atlas = ExtResource("2_kgxmt")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uah4e"]
-atlas = ExtResource("2_msvp6")
+atlas = ExtResource("2_kgxmt")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y072w"]
-atlas = ExtResource("2_msvp6")
+atlas = ExtResource("2_kgxmt")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f8kbt"]
-atlas = ExtResource("2_msvp6")
+atlas = ExtResource("2_kgxmt")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tnb64"]
-atlas = ExtResource("2_msvp6")
+atlas = ExtResource("2_kgxmt")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6x66"]
-atlas = ExtResource("2_msvp6")
+atlas = ExtResource("2_kgxmt")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8wca"]
-atlas = ExtResource("2_msvp6")
+atlas = ExtResource("2_kgxmt")
 region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wj8vp"]
-atlas = ExtResource("2_msvp6")
+atlas = ExtResource("2_kgxmt")
 region = Rect2(224, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_itfdf"]
-atlas = ExtResource("3_ms4r7")
+atlas = ExtResource("3_rcy6o")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7djc5"]
-atlas = ExtResource("3_ms4r7")
+atlas = ExtResource("3_rcy6o")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kcief"]
-atlas = ExtResource("3_ms4r7")
+atlas = ExtResource("3_rcy6o")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_is2l8"]
-atlas = ExtResource("3_ms4r7")
+atlas = ExtResource("3_rcy6o")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0la8y"]
-atlas = ExtResource("3_ms4r7")
+atlas = ExtResource("3_rcy6o")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qpt4v"]
-atlas = ExtResource("3_ms4r7")
+atlas = ExtResource("3_rcy6o")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yq8nx"]
-atlas = ExtResource("3_ms4r7")
+atlas = ExtResource("3_rcy6o")
 region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x71cu"]
@@ -132,46 +129,52 @@ animations = [{
 }]
 
 [node name="enemy" type="CharacterBody2D"]
-script = ExtResource("1_33dtn")
+collision_layer = 0
+script = ExtResource("1_gkqqm")
+speed = 3000
+max_health = 150
 
 [node name="bullet_detector" type="Area2D" parent="." groups=["enemy-group"]]
+position = Vector2(-7.62939e-06, -78)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bullet_detector"]
-position = Vector2(3, -11)
 shape = SubResource("RectangleShape2D_3j1n4")
 
-[node name="healthbar" type="ProgressBar" parent="."]
-modulate = Color(1, 0, 0, 1)
-offset_left = -40.0
-offset_top = -91.0
-offset_right = 45.0
-offset_bottom = -64.0
-value = 50.0
-show_percentage = false
-
 [node name="player_detector" type="Area2D" parent="."]
-position = Vector2(59, 22)
+position = Vector2(-43, -78)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_detector"]
-position = Vector2(-77, -9)
+position = Vector2(-20.75, 0)
 shape = SubResource("RectangleShape2D_js5op")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 4)
-shape = SubResource("RectangleShape2D_5igw8")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0.999998, 5)
-scale = Vector2(4.216, 4)
+modulate = Color(1, 0.5, 0.5, 1)
+position = Vector2(-12, -90)
+scale = Vector2(5.75, 5.45541)
 sprite_frames = SubResource("SpriteFrames_x71cu")
 animation = &"attack_anim"
 
 [node name="laser_timer" type="Timer" parent="."]
 
 [node name="trap_timer" type="Timer" parent="."]
+
+[node name="healthbar" type="ProgressBar" parent="."]
+modulate = Color(1, 0, 0, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.5
+offset_top = -177.0
+offset_right = 42.5
+offset_bottom = -166.0
+grow_horizontal = 2
+pivot_offset = Vector2(42.5, 0)
+size_flags_horizontal = 4
+value = 50.0
+show_percentage = false
 
 [connection signal="body_entered" from="bullet_detector" to="." method="_on_bullet_detector_body_entered"]
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]

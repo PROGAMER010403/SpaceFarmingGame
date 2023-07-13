@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
-@export var speed = 200
-@export var health = 100
+@export var speed = 6000
+@export var max_health = 100
 @export var damage_to_player = 20
+
+var current_health : int
 
 var takes_damage = false
 var trapped = false
@@ -17,40 +19,53 @@ var speed_s = speed
 func _ready():
 	add_to_group("enemies")
 	anim_player()
-
+	$healthbar.max_value = max_health
+	current_health = max_health
+	
+	if global_position.x <= -3:
+		scale.x = -1
+		$healthbar.scale.x = -1
 
 func _physics_process(delta):
-	velocity.x = -speed
-	_update_health()
+	if global_position.x >= 3:
+		velocity.x = -speed * delta
+	elif global_position.x <= -3:
+		velocity.x = speed * delta
+	if global_position.x >= -5 && global_position.x <= 5:
+		queue_free()
+	
+	_update_current_health()
 	move_and_slide()
 	laser_damage()
 
 
-func _update_health():
-	var healthbar = $healthbar
-	healthbar.value = health
-	if health >= 100:
-		healthbar.visible = false
+func _update_current_health():
+	var current_healthbar = $healthbar
+	current_healthbar.value = current_health
+	if current_health >= max_health:
+		current_healthbar.visible = false
 	else:
-		healthbar.visible = true
+		current_healthbar.visible = true
+	if current_health <= 0:
+		queue_free()
 
 
 func laser_damage():
 	if lasered:
-		health -= 1
+		current_health -= 1
 		$laser_timer.start()
 		slower()
 
 
 func trap_damage(trap_dmg):
 	if trapped:
-		health -= trap_dmg
+		current_health -= trap_dmg
 		slower()
 		$trap_timer.start()
 
 
 func damage(dmg):
-		health -= dmg
+		current_health -= dmg
 		print("dmg taken")
 		slower()
 		$Timer.start()
@@ -85,7 +100,7 @@ func _on_timer_timeout():
 
 
 func _on_player_detector_body_entered(body):
-	if body.has_method("android"):
+	if body.name == "Player":
 		is_attacking = true
 		speed = 0
 		anim_player()
@@ -100,14 +115,13 @@ func anim_player():
 
 
 func _on_player_detector_body_exited(body):
-	if body.has_method("android"):
+	if body.name == "Player":
 		is_attacking = false
 		speed = speed_s
 		anim_player()
 
 
 func _on_animated_sprite_2d_animation_finished():
-	print("done")
 	animation_finished = true
 	anim_player()
 
