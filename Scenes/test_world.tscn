@@ -8,9 +8,6 @@
 position = Vector2(589, 287)
 texture = ExtResource("1_hva2i")
 
-[node name="android" parent="." instance=ExtResource("3_r643j")]
-position = Vector2(-444, -13)
-
 [node name="bullet" parent="." instance=ExtResource("4_tmvc5")]
 position = Vector2(-128, -147)
 
