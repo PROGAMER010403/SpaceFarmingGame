@@ -6,6 +6,8 @@ extends Node
 #Following are empty variables, waiting for their corresponding objects to assign themselves upon ready
 var ZoomingCameraObject : Object
 var CurrentModuleAtMouse : Object
+var RightMostOpenEnd : Object
+var LeftMostOpenEnd : Object
 
 #Do not change these variables externally, these are used for optimization purposes to avoid constant update checks in dependant scripts
 var isZoomStateJustChanged : bool = false

@@ -1,0 +1,181 @@
+[gd_scene load_steps=22 format=3 uid="uid://bof5vya65ch4h"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_6kobv"]
+[ext_resource type="Texture2D" uid="uid://d13gcp1g5cxwl" path="res://Assets/Sprite-Sheets/OrangeEnemyAttackingAnimation.png" id="2_8d56c"]
+[ext_resource type="Texture2D" uid="uid://bdcx2ybpqmlml" path="res://Assets/Sprite-Sheets/OrangeEnemyWalkingAnimation.png" id="3_jhut0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3j1n4"]
+size = Vector2(128, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_js5op"]
+size = Vector2(21.375, 103.75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27lpq"]
+atlas = ExtResource("2_8d56c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uah4e"]
+atlas = ExtResource("2_8d56c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y072w"]
+atlas = ExtResource("2_8d56c")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8kbt"]
+atlas = ExtResource("2_8d56c")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnb64"]
+atlas = ExtResource("2_8d56c")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6x66"]
+atlas = ExtResource("2_8d56c")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8wca"]
+atlas = ExtResource("2_8d56c")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wj8vp"]
+atlas = ExtResource("2_8d56c")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itfdf"]
+atlas = ExtResource("3_jhut0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7djc5"]
+atlas = ExtResource("3_jhut0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcief"]
+atlas = ExtResource("3_jhut0")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_is2l8"]
+atlas = ExtResource("3_jhut0")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0la8y"]
+atlas = ExtResource("3_jhut0")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpt4v"]
+atlas = ExtResource("3_jhut0")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq8nx"]
+atlas = ExtResource("3_jhut0")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x71cu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27lpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uah4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y072w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8kbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnb64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6x66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8wca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wj8vp")
+}],
+"loop": false,
+"name": &"attack_anim",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itfdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7djc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcief")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is2l8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0la8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpt4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq8nx")
+}],
+"loop": true,
+"name": &"walking_anim",
+"speed": 10.0
+}]
+
+[node name="enemy" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_6kobv")
+
+[node name="bullet_detector" type="Area2D" parent="." groups=["enemy-group"]]
+position = Vector2(14, -45)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bullet_detector"]
+shape = SubResource("RectangleShape2D_3j1n4")
+
+[node name="player_detector" type="Area2D" parent="."]
+position = Vector2(-34, -58)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_detector"]
+shape = SubResource("RectangleShape2D_js5op")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -65)
+scale = Vector2(4.216, 4)
+sprite_frames = SubResource("SpriteFrames_x71cu")
+animation = &"attack_anim"
+
+[node name="laser_timer" type="Timer" parent="."]
+
+[node name="trap_timer" type="Timer" parent="."]
+
+[node name="healthbar" type="ProgressBar" parent="."]
+modulate = Color(1, 0, 0, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.5
+offset_top = -137.0
+offset_right = 42.5
+offset_bottom = -126.0
+grow_horizontal = 2
+pivot_offset = Vector2(42.5, 0)
+size_flags_horizontal = 4
+value = 50.0
+show_percentage = false
+
+[connection signal="body_entered" from="bullet_detector" to="." method="_on_bullet_detector_body_entered"]
+[connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]
+[connection signal="body_exited" from="player_detector" to="." method="_on_player_detector_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="laser_timer" to="." method="_on_laser_timer_timeout"]
+[connection signal="timeout" from="trap_timer" to="." method="_on_trap_timer_timeout"]

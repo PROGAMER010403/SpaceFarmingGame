@@ -34,12 +34,14 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("Mouse_Left_Click") && GlobalStatesManager.CurrentModuleAtMouse != null && snapTo != null:
 		GlobalStatesManager.CurrentModuleAtMouse.MODULE_STATE = 3
-		print(snapTo.name + " of " + str(snapTo.get_parent().get_parent()))
 		snapTo.hide()
 		update_state_characteristics()
 		GlobalStatesManager.CurrentModuleAtMouse.snapTo = null
 		GlobalStatesManager.CurrentModuleAtMouse = null
-
+	elif event.is_action_pressed("Cancel_Action") && GlobalStatesManager.CurrentModuleAtMouse != null:
+		GlobalStatesManager.CurrentModuleAtMouse.queue_free()
+		GlobalStatesManager.CurrentModuleAtMouse.snapTo = null
+		GlobalStatesManager.CurrentModuleAtMouse = null
 
 func update_walls():
 	if GlobalStatesManager.ZOOM_OUT_STATE == true:
@@ -67,8 +69,10 @@ func update_state_characteristics():
 		if snapTo != null:
 			if snapTo.name == RightEndObject.name:
 				GlobalStatesManager.CurrentModuleAtMouse.LeftEndObject.hide()
+				GlobalStatesManager.RightMostOpenEnd = RightEndObject
 			elif snapTo.name == LeftEndObject.name:
 				GlobalStatesManager.CurrentModuleAtMouse.RightEndObject.hide()
+				GlobalStatesManager.LeftMostOpenEnd = LeftEndObject
 
 
 func _on_mouse_entered_right_end():
