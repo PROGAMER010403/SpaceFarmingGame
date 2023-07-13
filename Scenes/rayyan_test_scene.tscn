@@ -1,14 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://b8njseudfhckb"]
 
-[ext_resource type="Script" path="res://Scripts/ModularBuilding.gd" id="1_lve4w"]
+[ext_resource type="Script" path="res://Scripts/MainNode.gd" id="1_7tasb"]
 [ext_resource type="PackedScene" uid="uid://durlojbj3xq6h" path="res://Prefabs/player.tscn" id="1_sjeir"]
 [ext_resource type="PackedScene" uid="uid://di0r7vye68keg" path="res://Prefabs/core_module.tscn" id="2_ucc5e"]
 [ext_resource type="Script" path="res://Scripts/BuildUI.gd" id="4_nx73b"]
 [ext_resource type="Script" path="res://Scenes/DebugMenu.gd" id="5_jjolq"]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(0, 323)
-script = ExtResource("1_lve4w")
+script = ExtResource("1_7tasb")
 
 [node name="Player" parent="." instance=ExtResource("1_sjeir")]
 

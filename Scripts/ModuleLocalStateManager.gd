@@ -72,7 +72,7 @@ func update_state_characteristics():
 				GlobalStatesManager.RightMostOpenEnd = RightEndObject
 			elif snapTo.name == LeftEndObject.name:
 				GlobalStatesManager.CurrentModuleAtMouse.RightEndObject.hide()
-				GlobalStatesManager.RightMostOpenEnd = LeftEndObject
+				GlobalStatesManager.LeftMostOpenEnd = LeftEndObject
 
 
 func _on_mouse_entered_right_end():

@@ -45,7 +45,9 @@ func pick_spawn_point():
 	var spawnPosition : Vector2
 	if spawnPositionIndex == 1:
 		spawnPosition = GlobalStatesManager.RightMostOpenEnd.global_position
+		print ("right")
 	elif spawnPositionIndex == 2:
+		print ("left")
 		spawnPosition = GlobalStatesManager.LeftMostOpenEnd.global_position
 	
 	return spawnPosition
