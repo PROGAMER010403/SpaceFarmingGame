@@ -1,0 +1,32 @@
+{
+  "1": {
+	"Enemy1Spawns": 11,
+	"Enemy2Spawns": 0,
+	"Enemy3Spawns": 0,
+	"SpawnSpacing": 2.5
+  },
+  "2": {
+	"Enemy1Spawns": 0,
+	"Enemy2Spawns": 7,
+	"Enemy3Spawns": 0,
+	"SpawnSpacing": 2
+  },
+  "3": {
+	"Enemy1Spawns": 0,
+	"Enemy2Spawns": 0,
+	"Enemy3Spawns": 5,
+	"SpawnSpacing": 1.5
+  },
+  "4": {
+	"Enemy1Spawns": 7,
+	"Enemy2Spawns": 5,
+	"Enemy3Spawns": 3,
+	"SpawnSpacing": 1
+  },
+  "5": {
+	"Enemy1Spawns": 11,
+	"Enemy2Spawns": 7,
+	"Enemy3Spawns": 5,
+	"SpawnSpacing": 1
+  }
+}

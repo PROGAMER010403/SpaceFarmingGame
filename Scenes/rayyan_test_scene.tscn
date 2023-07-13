@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8njseudfhckb"]
+[gd_scene load_steps=6 format=3 uid="uid://b8njseudfhckb"]
 
-[ext_resource type="Script" path="res://Scripts/ModularBuilding.gd" id="1_lve4w"]
+[ext_resource type="Script" path="res://Scripts/MainNode.gd" id="1_7tasb"]
 [ext_resource type="PackedScene" uid="uid://durlojbj3xq6h" path="res://Prefabs/player.tscn" id="1_sjeir"]
 [ext_resource type="PackedScene" uid="uid://di0r7vye68keg" path="res://Prefabs/core_module.tscn" id="2_ucc5e"]
 [ext_resource type="Script" path="res://Scripts/BuildUI.gd" id="4_nx73b"]
+[ext_resource type="Script" path="res://Scenes/DebugMenu.gd" id="5_jjolq"]
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(0, 323)
-script = ExtResource("1_lve4w")
+script = ExtResource("1_7tasb")
 
 [node name="Player" parent="." instance=ExtResource("1_sjeir")]
 
@@ -19,22 +19,17 @@ script = ExtResource("1_lve4w")
 layout_mode = 3
 anchors_preset = 0
 offset_left = 993.0
-offset_top = 29.0
+offset_top = 42.0
 offset_right = 993.0
-offset_bottom = 29.0
-size_flags_horizontal = 3
+offset_bottom = 42.0
+size_flags_horizontal = 8
 size_flags_vertical = 3
 script = ExtResource("4_nx73b")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BuildUI"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_right = 135.0
 offset_bottom = 66.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="FarmingModule" type="Button" parent="CanvasLayer/BuildUI/VBoxContainer"]
 layout_mode = 2
@@ -44,5 +39,47 @@ text = "Farming Module"
 layout_mode = 2
 text = "Turret Module 1"
 
+[node name="DebugMenu" type="VBoxContainer" parent="CanvasLayer/BuildUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -157.0
+offset_top = -30.0
+offset_right = -22.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_jjolq")
+
+[node name="Label" type="Label" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Debug Menu"
+horizontal_alignment = 1
+
+[node name="ZoomIn" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Zoom In"
+
+[node name="ZoomOut" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Zoom Out"
+
+[node name="SpawnEnemies" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Spawn Enemies"
+
+[node name="WaveID" type="SpinBox" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+rounded = true
+alignment = 1
+prefix = "Wave: "
+
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/FarmingModule" to="CanvasLayer/BuildUI" method="_on_farming_module_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/TurretModule1" to="CanvasLayer/BuildUI" method="_on_turret_module_1_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/ZoomIn" to="CanvasLayer/BuildUI/DebugMenu" method="_on_zoom_in_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/ZoomOut" to="CanvasLayer/BuildUI/DebugMenu" method="_on_zoom_out_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/SpawnEnemies" to="CanvasLayer/BuildUI/DebugMenu" method="_on_spawn_enemies_pressed"]
