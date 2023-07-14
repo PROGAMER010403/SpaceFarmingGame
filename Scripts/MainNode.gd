@@ -45,9 +45,7 @@ func pick_spawn_point():
 	var spawnPosition : Vector2
 	if spawnPositionIndex == 1:
 		spawnPosition = GlobalStatesManager.RightMostOpenEnd.global_position
-		print ("right")
 	elif spawnPositionIndex == 2:
-		print ("left")
 		spawnPosition = GlobalStatesManager.LeftMostOpenEnd.global_position
 	
 	return spawnPosition
@@ -62,6 +60,6 @@ func instantiate_enemy(enemyIndex, spawnPosition):
 	elif enemyIndex == 3:
 		newEnemy1Instance = Enemy3Prefab.instantiate()
 	
-	newEnemy1Instance.global_position = Vector2 (spawnPosition.x, 65)
+	newEnemy1Instance.global_position = Vector2 (spawnPosition.x, 320)
 	newEnemy1Instance.name = "Type" + str(enemyIndex) + "Enemy"
 	RootNode.add_child(newEnemy1Instance)

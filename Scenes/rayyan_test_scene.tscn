@@ -9,10 +9,6 @@
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7tasb")
 
-[node name="Player" parent="." instance=ExtResource("1_sjeir")]
-
-[node name="CoreModule" parent="." instance=ExtResource("2_ucc5e")]
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BuildUI" type="Control" parent="CanvasLayer"]
@@ -77,6 +73,11 @@ value = 1.0
 rounded = true
 alignment = 1
 prefix = "Wave: "
+
+[node name="Player" parent="." instance=ExtResource("1_sjeir")]
+position = Vector2(0, 196)
+
+[node name="CoreModule" parent="." instance=ExtResource("2_ucc5e")]
 
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/FarmingModule" to="CanvasLayer/BuildUI" method="_on_farming_module_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/TurretModule1" to="CanvasLayer/BuildUI" method="_on_turret_module_1_pressed"]

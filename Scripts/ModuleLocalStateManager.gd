@@ -22,10 +22,9 @@ func _process(delta):
 	
 	if MODULE_STATE == 1:
 		if get_global_mouse_position().x >= 0:
-			ContainerObject.position.x = 496
 			global_position = get_global_mouse_position()
 		elif get_global_mouse_position().x <= 0:
-			ContainerObject.position.x = -496
+			$Container/Room.flip_h
 			global_position = get_global_mouse_position()
 	elif MODULE_STATE == 2:
 		GlobalStatesManager.CurrentModuleAtMouse.global_position = snapTo.global_position
@@ -34,6 +33,7 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("Mouse_Left_Click") && GlobalStatesManager.CurrentModuleAtMouse != null && snapTo != null:
 		GlobalStatesManager.CurrentModuleAtMouse.MODULE_STATE = 3
+		GlobalStatesManager.CurrentModuleAtMouse.z_index = snapTo.get_parent().get_parent().z_index - 2
 		snapTo.hide()
 		update_state_characteristics()
 		GlobalStatesManager.CurrentModuleAtMouse.snapTo = null

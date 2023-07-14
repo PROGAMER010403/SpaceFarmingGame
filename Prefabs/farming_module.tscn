@@ -1,7 +1,66 @@
-[gd_scene load_steps=8 format=3 uid="uid://kbweuijtovw6"]
+[gd_scene load_steps=18 format=3 uid="uid://kbweuijtovw6"]
 
 [ext_resource type="Script" path="res://Scripts/ModuleLocalStateManager.gd" id="1_b4e0l"]
+[ext_resource type="Texture2D" uid="uid://chtuo38yqgh8r" path="res://Assets/Sprite-Sheets/FarmingModuleAnimated.png" id="2_4uvm5"]
 [ext_resource type="Texture2D" uid="uid://b0m8nw8kjo73x" path="res://Assets/Sprites/icon.svg" id="2_g0s4h"]
+[ext_resource type="Texture2D" uid="uid://bsxdooy2pdsgf" path="res://Assets/Sprites/ModuleWallHalfGreen.png" id="3_si63h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlan8"]
+atlas = ExtResource("2_4uvm5")
+region = Rect2(0, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lc5vv"]
+atlas = ExtResource("2_4uvm5")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g52pp"]
+atlas = ExtResource("2_4uvm5")
+region = Rect2(256, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjajh"]
+atlas = ExtResource("2_4uvm5")
+region = Rect2(384, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t14yo"]
+atlas = ExtResource("2_4uvm5")
+region = Rect2(512, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pno76"]
+atlas = ExtResource("2_4uvm5")
+region = Rect2(640, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n68e6"]
+atlas = ExtResource("2_4uvm5")
+region = Rect2(768, 0, 128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lq7ph"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlan8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lc5vv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g52pp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjajh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t14yo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pno76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n68e6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
 
 [sub_resource type="Animation" id="Animation_nxda5"]
 resource_name = "Fade_In"
@@ -15,7 +74,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(3, 3, 2.34902, 0), Color(3, 3, 2.35, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_pjwhw"]
@@ -30,7 +89,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(3, 3, 2.35, 1), Color(3, 3, 2.34902, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_br484"]
@@ -58,23 +117,22 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2n0ox"]
 size = Vector2(108, 106)
 
-[node name="CoreModule" type="Node2D"]
+[node name="FarmingModule" type="Node2D"]
 script = ExtResource("1_b4e0l")
 
 [node name="Container" type="Node2D" parent="."]
+position = Vector2(590, 0)
 
-[node name="Room" type="Sprite2D" parent="Container"]
-modulate = Color(0.262745, 0.32549, 0, 1)
-z_index = -1
-scale = Vector2(7.75, 3.07813)
-texture = ExtResource("2_g0s4h")
+[node name="Room" type="AnimatedSprite2D" parent="Container"]
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_lq7ph")
+autoplay = "default"
 
 [node name="Wall" type="Sprite2D" parent="Container"]
 modulate = Color(3, 3, 2.34902, 0)
 z_index = 1
-rotation = -3.14159
-scale = Vector2(7.75, 3.07813)
-texture = ExtResource("2_g0s4h")
+scale = Vector2(10, 10)
+texture = ExtResource("3_si63h")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Container/Wall"]
 libraries = {
@@ -83,7 +141,7 @@ libraries = {
 
 [node name="LeftEnd" type="Marker2D" parent="Container"]
 z_index = 2
-position = Vector2(-496, 0)
+position = Vector2(-640, 0)
 
 [node name="Area2D" type="Area2D" parent="Container/LeftEnd"]
 
@@ -97,7 +155,7 @@ texture = ExtResource("2_g0s4h")
 
 [node name="RightEnd" type="Marker2D" parent="Container"]
 z_index = 2
-position = Vector2(496, 0)
+position = Vector2(640, 0)
 
 [node name="Area2D" type="Area2D" parent="Container/RightEnd"]
 
