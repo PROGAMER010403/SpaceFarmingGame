@@ -113,7 +113,7 @@ z_index = -1
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_ipum8")
 autoplay = "default"
-frame_progress = 0.111216
+frame_progress = 0.520428
 
 [node name="Wall" type="Sprite2D" parent="Container"]
 modulate = Color(3, 3, 2.34902, 0)

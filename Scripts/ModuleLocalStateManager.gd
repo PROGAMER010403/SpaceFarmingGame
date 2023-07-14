@@ -22,9 +22,12 @@ func _process(delta):
 	
 	if MODULE_STATE == 1:
 		if get_global_mouse_position().x >= 0:
+			GlobalStatesManager.CurrentModuleAtMouse.ContainerObject.position.x = 590
 			global_position = get_global_mouse_position()
 		elif get_global_mouse_position().x <= 0:
-			$Container/Room.flip_h
+			GlobalStatesManager.CurrentModuleAtMouse.get_node("Container/Room").scale.x = -10
+			GlobalStatesManager.CurrentModuleAtMouse.get_node("Container/Wall").scale.x = -10
+			GlobalStatesManager.CurrentModuleAtMouse.ContainerObject.position.x = -590
 			global_position = get_global_mouse_position()
 	elif MODULE_STATE == 2:
 		GlobalStatesManager.CurrentModuleAtMouse.global_position = snapTo.global_position

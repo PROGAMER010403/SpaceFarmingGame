@@ -75,7 +75,7 @@ alignment = 1
 prefix = "Wave: "
 
 [node name="Player" parent="." instance=ExtResource("1_sjeir")]
-position = Vector2(0, 196)
+position = Vector2(0, 200)
 
 [node name="CoreModule" parent="." instance=ExtResource("2_ucc5e")]
 
