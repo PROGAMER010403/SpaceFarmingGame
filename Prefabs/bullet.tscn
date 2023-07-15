@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_058d0"]
 size = Vector2(123.5, 125)
 
-[node name="bullet" type="CharacterBody2D"]
+[node name="bullet" type="RigidBody2D"]
+mass = 0.01
+gravity_scale = 0.0
 script = ExtResource("1_r7o7c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -14,4 +16,5 @@ texture = ExtResource("2_nlt3l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.25, -2.5)
+scale = Vector2(0.1, 0.1)
 shape = SubResource("RectangleShape2D_058d0")
