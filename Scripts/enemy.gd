@@ -140,3 +140,7 @@ func _on_player_detector_area_entered(area):
 	if area.name == "HumanPodArea2D":
 		area.get_parent().destroyed()
 		queue_free()
+
+
+func _on_tree_exited():
+	GlobalStatesManager.RootNodeObject.check_enemies()

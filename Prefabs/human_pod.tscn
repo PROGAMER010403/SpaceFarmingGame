@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck4jmi4y5wiqt"]
+[gd_scene load_steps=10 format=3 uid="uid://ck4jmi4y5wiqt"]
 
-[ext_resource type="Script" path="res://Prefabs/human_pod.gd" id="1_r35ch"]
+[ext_resource type="Script" path="res://Scripts/human_pod.gd" id="1_8rjfv"]
 [ext_resource type="Texture2D" uid="uid://g7spqrvc8a7l" path="res://Assets/Sprite-Sheets/HumanPodMultiState.png" id="2_5kkwr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oasd6"]
@@ -42,9 +42,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ykigv"]
 size = Vector2(12, 36)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdbrg"]
+size = Vector2(3.2, 36.3)
+
 [node name="HumanPod" type="Node2D"]
 scale = Vector2(10, 10)
-script = ExtResource("1_r35ch")
+script = ExtResource("1_8rjfv")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, 0)
@@ -57,3 +60,52 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HumanPodArea2D"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_ykigv")
+
+[node name="HumanPodArea2DSmall" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HumanPodArea2DSmall"]
+position = Vector2(0, -1.15)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_fdbrg")
+
+[node name="NotifUI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -29.0
+offset_right = 114.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="NotifUI"]
+modulate = Color(21.89, 0, 0.24, 0.51)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NotifLabel" type="Label" parent="NotifUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Something
+Required"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NotifUI"]
