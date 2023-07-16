@@ -41,7 +41,9 @@ func _on_spawn_enemies_pressed():
 
 func _on_next_cycle_pressed():
 	GlobalStatesManager.currentCycleCount += 1
+	GlobalStatesManager.produce_resources()
 	$CycleLabel.text = "Cycle: " + str(GlobalStatesManager.currentCycleCount)
+	GlobalStatesManager.GoalHUDObject.update_resources()
 
 
 func _on_prev_cycle_pressed():
