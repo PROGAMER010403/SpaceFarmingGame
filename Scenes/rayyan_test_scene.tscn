@@ -1,17 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8njseudfhckb"]
+[gd_scene load_steps=11 format=3 uid="uid://b8njseudfhckb"]
 
 [ext_resource type="Script" path="res://Scripts/MainNode.gd" id="1_7tasb"]
 [ext_resource type="PackedScene" uid="uid://durlojbj3xq6h" path="res://Prefabs/player.tscn" id="1_sjeir"]
 [ext_resource type="PackedScene" uid="uid://di0r7vye68keg" path="res://Prefabs/core_module.tscn" id="2_ucc5e"]
+[ext_resource type="Script" path="res://Scripts/GoalHUD.gd" id="4_jrige"]
 [ext_resource type="Script" path="res://Scripts/BuildUI.gd" id="4_nx73b"]
 [ext_resource type="Script" path="res://Scripts/DebugMenu.gd" id="5_5pth4"]
+[ext_resource type="PackedScene" uid="uid://ck4jmi4y5wiqt" path="res://Prefabs/human_pod.tscn" id="5_0874p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5j2so"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8i55"]
+bg_color = Color(0, 0.392157, 0.819608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gmaak"]
+bg_color = Color(0.74902, 0, 0.403922, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7tasb")
-
-[node name="Player" parent="." instance=ExtResource("1_sjeir")]
-
-[node name="CoreModule" parent="." instance=ExtResource("2_ucc5e")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -44,10 +50,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -157.0
-offset_top = -30.0
-offset_right = -22.0
-offset_bottom = 136.0
+offset_top = 103.0
+offset_right = 135.0
+offset_bottom = 474.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_5pth4")
@@ -65,6 +70,20 @@ text = "Zoom In"
 layout_mode = 2
 text = "Zoom Out"
 
+[node name="NextCycle" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Next Cycle"
+
+[node name="CycleLabel" type="Label" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Cycle: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrevCycle" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Prev Cycle"
+
 [node name="SpawnEnemies" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
 layout_mode = 2
 text = "Spawn Enemies"
@@ -78,8 +97,164 @@ rounded = true
 alignment = 1
 prefix = "Wave: "
 
+[node name="FarmPhase" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Farm Phase"
+
+[node name="BuildPhase" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Build Phase"
+
+[node name="WavePhase" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Build Phase"
+
+[node name="AddAmount" type="SpinBox" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+min_value = -100.0
+
+[node name="AddFood" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Add Food"
+
+[node name="AddMaterials" type="Button" parent="CanvasLayer/BuildUI/DebugMenu"]
+layout_mode = 2
+text = "Add Materials"
+
+[node name="GoalHUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -397.0
+offset_top = 22.0
+offset_right = 397.0
+offset_bottom = 97.0
+grow_horizontal = 2
+script = ExtResource("4_jrige")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GoalHUD"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GoalHUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GoalHUD/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="HumanReqs" type="VBoxContainer" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer/HBoxContainer/HumanReqs"]
+layout_mode = 2
+text = "Human Requirements: 0/7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer/HBoxContainer/HumanReqs"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_5j2so")
+theme_override_styles/fill = SubResource("StyleBoxFlat_j8i55")
+max_value = 7.0
+step = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="AlienThreat" type="VBoxContainer" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer/HBoxContainer/AlienThreat"]
+layout_mode = 2
+text = "Alien Waves Eliminated: 0/5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer/HBoxContainer/AlienThreat"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_5j2so")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gmaak")
+max_value = 5.0
+step = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="FoodLabel" type="Label" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Food: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaterialsLabel" type="Label" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Materials: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoreModule" parent="." instance=ExtResource("2_ucc5e")]
+
+[node name="HumanPods" type="Node2D" parent="."]
+
+[node name="HumanPod" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(247, 81)
+POD_STATE = 1
+
+[node name="HumanPod2" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(109, 81)
+POD_STATE = 1
+
+[node name="HumanPod3" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(-27, 81)
+POD_STATE = 1
+
+[node name="HumanPod4" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(-164, 81)
+POD_STATE = 1
+
+[node name="HumanPod5" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(-300, 80)
+POD_STATE = 1
+
+[node name="Player" parent="." instance=ExtResource("1_sjeir")]
+position = Vector2(0, 211)
+
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/FarmingModule" to="CanvasLayer/BuildUI" method="_on_farming_module_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/TurretModule1" to="CanvasLayer/BuildUI" method="_on_turret_module_1_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/ZoomIn" to="CanvasLayer/BuildUI/DebugMenu" method="_on_zoom_in_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/ZoomOut" to="CanvasLayer/BuildUI/DebugMenu" method="_on_zoom_out_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/NextCycle" to="CanvasLayer/BuildUI/DebugMenu" method="_on_next_cycle_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/PrevCycle" to="CanvasLayer/BuildUI/DebugMenu" method="_on_prev_cycle_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/SpawnEnemies" to="CanvasLayer/BuildUI/DebugMenu" method="_on_spawn_enemies_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/FarmPhase" to="CanvasLayer/BuildUI/DebugMenu" method="_on_farm_phase_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/BuildPhase" to="CanvasLayer/BuildUI/DebugMenu" method="_on_build_phase_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/WavePhase" to="CanvasLayer/BuildUI/DebugMenu" method="_on_wave_phase_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/AddFood" to="CanvasLayer/BuildUI/DebugMenu" method="_on_add_food_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/AddMaterials" to="CanvasLayer/BuildUI/DebugMenu" method="_on_add_materials_pressed"]
