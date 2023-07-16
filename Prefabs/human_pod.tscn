@@ -66,7 +66,6 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HumanPodArea2DSmall"]
 position = Vector2(0, -1.15)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_fdbrg")
 
 [node name="NotifUI" type="Control" parent="."]
