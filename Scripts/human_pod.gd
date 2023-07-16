@@ -111,7 +111,7 @@ func resolveNotification():
 			isReqsMet = true
 			NotifUIObject.visible = false
 			isFedLastCycle = true
-			GlobalStatesManager.currentFoodResource -= 1
+			GlobalStatesManager.currentFoodResource -= 2
 			GlobalStatesManager.GoalHUDObject.update_resources()
 	elif currentNotifID == 3:
 		NotifUIObject.visible = false
