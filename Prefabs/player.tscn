@@ -8,6 +8,8 @@
 size = Vector2(118, 120)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_5aix3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -17,5 +19,6 @@ texture = ExtResource("2_sn23d")
 shape = SubResource("RectangleShape2D_o4fq4")
 
 [node name="ZoomingCamera2D" parent="." instance=ExtResource("3_1nekc")]
+position = Vector2(0, -144)
 maxZoomLevel = 1.0
 minZoomLevel = 0.2

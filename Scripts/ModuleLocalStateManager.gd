@@ -22,6 +22,8 @@ func _process(delta):
 	
 	if MODULE_STATE == 1:
 		if get_global_mouse_position().x >= 0:
+			GlobalStatesManager.CurrentModuleAtMouse.get_node("Container/Room").scale.x = 10
+			GlobalStatesManager.CurrentModuleAtMouse.get_node("Container/Wall").scale.x = 10
 			GlobalStatesManager.CurrentModuleAtMouse.ContainerObject.position.x = 590
 			global_position = get_global_mouse_position()
 		elif get_global_mouse_position().x <= 0:

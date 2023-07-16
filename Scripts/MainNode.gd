@@ -60,6 +60,6 @@ func instantiate_enemy(enemyIndex, spawnPosition):
 	elif enemyIndex == 3:
 		newEnemy1Instance = Enemy3Prefab.instantiate()
 	
-	newEnemy1Instance.global_position = Vector2 (spawnPosition.x, 260)
+	newEnemy1Instance.global_position = Vector2 (spawnPosition.x, 275)
 	newEnemy1Instance.name = "Type" + str(enemyIndex) + "Enemy"
 	RootNode.add_child(newEnemy1Instance)

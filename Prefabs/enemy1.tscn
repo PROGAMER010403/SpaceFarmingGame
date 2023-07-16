@@ -129,8 +129,10 @@ animations = [{
 }]
 
 [node name="enemy" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
 collision_layer = 0
 script = ExtResource("1_6kobv")
+speed = 5000
 
 [node name="bullet_detector" type="Area2D" parent="." groups=["enemy-group"]]
 position = Vector2(14, -45)
@@ -140,6 +142,7 @@ shape = SubResource("RectangleShape2D_3j1n4")
 
 [node name="player_detector" type="Area2D" parent="."]
 position = Vector2(-34, -58)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_detector"]
 shape = SubResource("RectangleShape2D_js5op")
@@ -173,6 +176,7 @@ value = 50.0
 show_percentage = false
 
 [connection signal="body_entered" from="bullet_detector" to="." method="_on_bullet_detector_body_entered"]
+[connection signal="area_entered" from="player_detector" to="." method="_on_player_detector_area_entered"]
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]
 [connection signal="body_exited" from="player_detector" to="." method="_on_player_detector_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

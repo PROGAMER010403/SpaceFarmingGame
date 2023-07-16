@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8njseudfhckb"]
+[gd_scene load_steps=7 format=3 uid="uid://b8njseudfhckb"]
 
 [ext_resource type="Script" path="res://Scripts/MainNode.gd" id="1_7tasb"]
 [ext_resource type="PackedScene" uid="uid://durlojbj3xq6h" path="res://Prefabs/player.tscn" id="1_sjeir"]
 [ext_resource type="PackedScene" uid="uid://di0r7vye68keg" path="res://Prefabs/core_module.tscn" id="2_ucc5e"]
 [ext_resource type="Script" path="res://Scripts/BuildUI.gd" id="4_nx73b"]
 [ext_resource type="Script" path="res://Scripts/DebugMenu.gd" id="5_5pth4"]
+[ext_resource type="PackedScene" uid="uid://ck4jmi4y5wiqt" path="res://Prefabs/human_pod.tscn" id="5_0874p"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7tasb")
@@ -74,10 +75,27 @@ rounded = true
 alignment = 1
 prefix = "Wave: "
 
-[node name="Player" parent="." instance=ExtResource("1_sjeir")]
-position = Vector2(0, 200)
-
 [node name="CoreModule" parent="." instance=ExtResource("2_ucc5e")]
+
+[node name="HumanPods" type="Node2D" parent="."]
+
+[node name="HumanPod" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(247, 81)
+
+[node name="HumanPod2" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(109, 81)
+
+[node name="HumanPod3" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(-27, 81)
+
+[node name="HumanPod4" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(-164, 81)
+
+[node name="HumanPod5" parent="HumanPods" instance=ExtResource("5_0874p")]
+position = Vector2(-300, 80)
+
+[node name="Player" parent="." instance=ExtResource("1_sjeir")]
+position = Vector2(0, 211)
 
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/FarmingModule" to="CanvasLayer/BuildUI" method="_on_farming_module_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/TurretModule1" to="CanvasLayer/BuildUI" method="_on_turret_module_1_pressed"]
