@@ -19,3 +19,18 @@ shape = SubResource("RectangleShape2D_o4fq4")
 [node name="ZoomingCamera2D" parent="." instance=ExtResource("3_1nekc")]
 maxZoomLevel = 1.0
 minZoomLevel = 0.2
+
+[node name="healthbar" type="ProgressBar" parent="."]
+modulate = Color(0, 1, 0, 1)
+offset_left = -44.0
+offset_top = -99.0
+offset_right = 53.0
+offset_bottom = -72.0
+value = 100.0
+show_percentage = false
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-82, 6)
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(79, 1)
