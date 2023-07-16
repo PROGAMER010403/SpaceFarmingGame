@@ -9,7 +9,10 @@ var Enemy1Prefab = preload("res://Prefabs/enemy1.tscn")
 var Enemy2Prefab = preload("res://Prefabs/enemy2.tscn")
 var Enemy3Prefab = preload("res://Prefabs/enemy3.tscn")
 
+var isCurrentWaveSpawned : bool = false
+
 func _ready():
+	GlobalStatesManager.RootNodeObject = self
 	$CoreModule.MODULE_STATE = 3
 	GlobalStatesManager.RightMostOpenEnd = $CoreModule/Container/RightEnd
 	GlobalStatesManager.LeftMostOpenEnd = $CoreModule/Container/LeftEnd
@@ -38,6 +41,8 @@ func spawn_enemies(enemy1, enemy2, enemy3, spacing):
 	for i in range(enemy3):
 		await get_tree().create_timer(float(spacing)).timeout
 		instantiate_enemy(3, pick_spawn_point())
+	isCurrentWaveSpawned = true
+	
 
 
 func pick_spawn_point():
@@ -45,9 +50,7 @@ func pick_spawn_point():
 	var spawnPosition : Vector2
 	if spawnPositionIndex == 1:
 		spawnPosition = GlobalStatesManager.RightMostOpenEnd.global_position
-		print ("right")
 	elif spawnPositionIndex == 2:
-		print ("left")
 		spawnPosition = GlobalStatesManager.LeftMostOpenEnd.global_position
 	
 	return spawnPosition
@@ -62,6 +65,18 @@ func instantiate_enemy(enemyIndex, spawnPosition):
 	elif enemyIndex == 3:
 		newEnemy1Instance = Enemy3Prefab.instantiate()
 	
-	newEnemy1Instance.global_position = Vector2 (spawnPosition.x, 65)
+	newEnemy1Instance.global_position = Vector2 (spawnPosition.x, 275)
 	newEnemy1Instance.name = "Type" + str(enemyIndex) + "Enemy"
 	RootNode.add_child(newEnemy1Instance)
+
+
+func check_enemies():
+	var enemiesInCurrentScene : Array
+	for i in self.get_children():
+		if i.has_node("bullet_detector"):
+			enemiesInCurrentScene.append(i)
+	if enemiesInCurrentScene == [] && isCurrentWaveSpawned == true:
+		GlobalStatesManager.currentCycleCount += 1
+		GlobalStatesManager.currentWavesCount += 1
+		GlobalStatesManager.GoalHUDObject.update_wave_goals()
+		isCurrentWaveSpawned == false
