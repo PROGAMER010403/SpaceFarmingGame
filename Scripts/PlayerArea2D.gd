@@ -37,6 +37,11 @@ func _on_area_entered(area):
 				ReqsLabel.get_parent().show()
 				ReqsLabel.text = "2 Materials"
 			currentArea = area
+	elif area.name == "FarmingArea2D":
+		AnimationPlayerObject.play("Fade_In")
+		InteractLabelObject.text = defaultLabelText + "Use Farm"
+		ReqsLabel.get_parent().hide()
+		currentArea = area
 
 
 func _on_area_exited(area):
@@ -54,9 +59,14 @@ func _on_animation_player_animation_finished(anim_name):
 func interactAction(object):
 	object.get_parent().interacted()
 	if isInteractUIVisible == true:
-		if object.get_parent().isReqsMet == true:
+		if object.name == "HumanPodArea2DSmall":
+			if object.get_parent().isReqsMet == true:
+				AnimationPlayerObject.play("Fade_Out")
+				InteractLabelObject.text = defaultLabelText
+				isInteractUIVisible = false
+			elif object.get_parent().isReqsMet == false:
+				ReqsLabel.get_node("AnimationPlayer").play("Red")
+		if object.name == "FarmingArea2D":
 			AnimationPlayerObject.play("Fade_Out")
 			InteractLabelObject.text = defaultLabelText
 			isInteractUIVisible = false
-		elif object.get_parent().isReqsMet == false:
-			ReqsLabel.get_node("AnimationPlayer").play("Red")
