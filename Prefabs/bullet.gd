@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 func damage_value():
-	return(20)
+	return(25)
 	
 func bullet():
 	pass
