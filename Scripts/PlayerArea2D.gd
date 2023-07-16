@@ -14,34 +14,35 @@ func _input(event):
 
 
 func _on_area_entered(area):
-	if area.name == "HumanPodArea2DSmall":
-		if area.get_parent().NotifUIObject.visible == true:
-			if area.get_parent().POD_STATE == 1:
-				AnimationPlayerObject.play("Fade_In")
-				InteractLabelObject.text = defaultLabelText + "Grow Human"
-				ReqsLabel.get_parent().show()
-				ReqsLabel.text = "1 Food"
-			elif area.get_parent().POD_STATE == 2 || area.get_parent().POD_STATE == 3:
-				if area.get_parent().isFedLastCycle == false:
+	if GlobalStatesManager.PHASE_STATE == 2:
+		if area.name == "HumanPodArea2DSmall":
+			if area.get_parent().NotifUIObject.visible == true:
+				if area.get_parent().POD_STATE == 1:
 					AnimationPlayerObject.play("Fade_In")
-					InteractLabelObject.text = defaultLabelText + "Feed Human"
+					InteractLabelObject.text = defaultLabelText + "Grow Human"
 					ReqsLabel.get_parent().show()
-					ReqsLabel.text = "2 Food"
-				elif area.get_parent().isFedLastCycle == true:
+					ReqsLabel.text = "1 Food"
+				elif area.get_parent().POD_STATE == 2 || area.get_parent().POD_STATE == 3:
+					if area.get_parent().isFedLastCycle == false:
+						AnimationPlayerObject.play("Fade_In")
+						InteractLabelObject.text = defaultLabelText + "Feed Human"
+						ReqsLabel.get_parent().show()
+						ReqsLabel.text = "2 Food"
+					elif area.get_parent().isFedLastCycle == true:
+						AnimationPlayerObject.play("Fade_In")
+						InteractLabelObject.text = defaultLabelText + "Harvest Human"
+						ReqsLabel.get_parent().hide()
+				elif area.get_parent().POD_STATE == 4:
 					AnimationPlayerObject.play("Fade_In")
-					InteractLabelObject.text = defaultLabelText + "Harvest Human"
-					ReqsLabel.get_parent().hide()
-			elif area.get_parent().POD_STATE == 4:
-				AnimationPlayerObject.play("Fade_In")
-				InteractLabelObject.text = defaultLabelText + "Repair Pod"
-				ReqsLabel.get_parent().show()
-				ReqsLabel.text = "2 Materials"
+					InteractLabelObject.text = defaultLabelText + "Repair Pod"
+					ReqsLabel.get_parent().show()
+					ReqsLabel.text = "2 Materials"
+				currentArea = area
+		elif area.name == "FarmingArea2D":
+			AnimationPlayerObject.play("Fade_In")
+			InteractLabelObject.text = defaultLabelText + "Use Farm"
+			ReqsLabel.get_parent().hide()
 			currentArea = area
-	elif area.name == "FarmingArea2D":
-		AnimationPlayerObject.play("Fade_In")
-		InteractLabelObject.text = defaultLabelText + "Use Farm"
-		ReqsLabel.get_parent().hide()
-		currentArea = area
 
 
 func _on_area_exited(area):

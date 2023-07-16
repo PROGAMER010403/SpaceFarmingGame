@@ -25,11 +25,6 @@ func place_module(moduleID):
 		ModuleInstance.name = "FarmingModule"
 		ModuleInstance.MODULE_STATE = 1
 		add_child(ModuleInstance)
-	elif moduleID == 2:
-		var ModuleInstance = Turret1ModulePrefab.instantiate()
-		ModuleInstance.name = "Turret1Module"
-		ModuleInstance.MODULE_STATE = 1
-		add_child(ModuleInstance)
 
 
 func spawn_enemies(enemy1, enemy2, enemy3, spacing):
@@ -79,4 +74,5 @@ func check_enemies():
 		GlobalStatesManager.currentCycleCount += 1
 		GlobalStatesManager.currentWavesCount += 1
 		GlobalStatesManager.GoalHUDObject.update_wave_goals()
+		$CanvasLayer/BuildUI/VBoxContainer4.show()
 		isCurrentWaveSpawned == false

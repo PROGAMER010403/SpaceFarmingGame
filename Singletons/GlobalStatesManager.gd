@@ -8,8 +8,8 @@ var currentCycleCount : int = 1
 var currentHumansCount : int = 0
 var currentWavesCount : int = 0
 
-var currentFoodResource : int = 0
-var currentMaterialsResource : int = 0
+var currentFoodResource : int = 1
+var currentMaterialsResource : int = 3
 var farmsMakingFood : int = 0
 var farmsMakingMaterials : int = 0
 
@@ -25,7 +25,6 @@ var RootNodeObject : Object
 var isZoomStateJustChanged : bool = false
 var knownCycleCount : int = 1
 
-
 #In order to optimize performance, we only call update functions if their states have been changed instead of calling every frame
 func _process(delta):
 	
@@ -35,6 +34,11 @@ func _process(delta):
 			update_zoom_state()
 		elif ZOOM_OUT_STATE == ZoomingCameraObject.actualZoomOutState && isZoomStateJustChanged == true:
 			isZoomStateJustChanged = false
+
+	if PHASE_STATE == 1:
+		ZOOM_OUT_STATE = true
+	elif PHASE_STATE == 2:
+		ZOOM_OUT_STATE = false
 
 #Calls relevant function in ZoomingCameraObject based on ZOOM_OUT_STATE
 func update_zoom_state():
