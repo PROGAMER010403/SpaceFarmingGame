@@ -4,12 +4,15 @@ extends Node2D
 @onready var LeftEndObject := $Container/LeftEnd
 @onready var RightEndObject := $Container/RightEnd
 @onready var WallAnimatorObject := $Container/Wall/AnimationPlayer
+@onready var RoomObject := $Container/Room
 
 @export var MODULE_STATE : int # 1 = Hover | 2 = Snapped | 3 = Placed
 
 var GreenOpenEndIcon = preload("res://Assets/Sprites/icon.svg")
 
 var snapTo : Object
+
+var  farmIsMaking : int = 0 # 1 = Food | 2 = Materials
 
 func _ready():
 	update_state_characteristics()
@@ -22,10 +25,14 @@ func _process(delta):
 	
 	if MODULE_STATE == 1:
 		if get_global_mouse_position().x >= 0:
-			ContainerObject.position.x = 496
+			GlobalStatesManager.CurrentModuleAtMouse.get_node("Container/Room").scale.x = 10
+			GlobalStatesManager.CurrentModuleAtMouse.get_node("Container/Wall").scale.x = 10
+			GlobalStatesManager.CurrentModuleAtMouse.ContainerObject.position.x = 590
 			global_position = get_global_mouse_position()
 		elif get_global_mouse_position().x <= 0:
-			ContainerObject.position.x = -496
+			GlobalStatesManager.CurrentModuleAtMouse.get_node("Container/Room").scale.x = -10
+			GlobalStatesManager.CurrentModuleAtMouse.get_node("Container/Wall").scale.x = -10
+			GlobalStatesManager.CurrentModuleAtMouse.ContainerObject.position.x = -590
 			global_position = get_global_mouse_position()
 	elif MODULE_STATE == 2:
 		GlobalStatesManager.CurrentModuleAtMouse.global_position = snapTo.global_position
@@ -34,6 +41,7 @@ func _process(delta):
 func _input(event):
 	if event.is_action_pressed("Mouse_Left_Click") && GlobalStatesManager.CurrentModuleAtMouse != null && snapTo != null:
 		GlobalStatesManager.CurrentModuleAtMouse.MODULE_STATE = 3
+		GlobalStatesManager.CurrentModuleAtMouse.z_index = snapTo.get_parent().get_parent().z_index - 2
 		snapTo.hide()
 		update_state_characteristics()
 		GlobalStatesManager.CurrentModuleAtMouse.snapTo = null
@@ -102,3 +110,44 @@ func _on_mouse_exited_left_area():
 		GlobalStatesManager.CurrentModuleAtMouse.snapTo = null
 		GlobalStatesManager.CurrentModuleAtMouse.update_state_characteristics()
 
+
+func _on_farming_area_2d_body_exited(body):
+	if body.name == "Player":
+		$Control.hide()
+
+
+func _on_button_pressed():
+	var farmWasMaking = 0
+	if RoomObject.animation == "food":
+		farmWasMaking = 1
+	elif RoomObject.animation == "materials":
+		farmWasMaking = 2
+	RoomObject.animation = "materials"
+	farmIsMaking = 2
+	update_global_produce(farmWasMaking)
+	$Control.hide()
+
+
+func _on_food_button_pressed():
+	var farmWasMaking = 0
+	if RoomObject.animation == "materials":
+		farmWasMaking = 2
+	elif RoomObject.animation == "food":
+		farmWasMaking = 1
+	RoomObject.animation = "food"
+	farmIsMaking = 1
+	update_global_produce(farmWasMaking)
+	$Control.hide()
+
+
+func update_global_produce(wasMaking):
+	if wasMaking != farmIsMaking:
+		if farmIsMaking == 1:
+			GlobalStatesManager.farmsMakingFood += 1
+		elif farmIsMaking == 2:
+			GlobalStatesManager.farmsMakingMaterials += 1
+		
+		if wasMaking == 1:
+			GlobalStatesManager.farmsMakingFood -= 1
+		elif wasMaking == 2:
+			GlobalStatesManager.farmsMakingMaterials -= 1

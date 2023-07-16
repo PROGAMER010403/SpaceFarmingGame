@@ -1,24 +1,328 @@
-[gd_scene load_steps=5 format=3 uid="uid://durlojbj3xq6h"]
+[gd_scene load_steps=26 format=3 uid="uid://durlojbj3xq6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_5aix3"]
-[ext_resource type="Texture2D" uid="uid://b0m8nw8kjo73x" path="res://Assets/Sprites/icon.svg" id="2_sn23d"]
+[ext_resource type="Texture2D" uid="uid://1s5ufobnemru" path="res://Assets/Sprite-Sheets/AndroidWalking.png" id="2_evq4i"]
 [ext_resource type="PackedScene" uid="uid://be0bxra4qmnsx" path="res://Prefabs/zooming_camera_2d.tscn" id="3_1nekc"]
+[ext_resource type="Script" path="res://Scripts/PlayerArea2D.gd" id="4_t5py0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnha1"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxt54"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae1ai"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kep3h"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubtej"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ice7b"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p5qx"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bxkt"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ubkn"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7ih3"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kios2"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rtwqn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnha1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxt54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae1ai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kep3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubtej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ice7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p5qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bxkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ubkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7ih3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kios2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4fq4"]
-size = Vector2(118, 120)
+size = Vector2(60, 306)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_am8eo"]
+size = Vector2(28, 298)
+
+[sub_resource type="Animation" id="Animation_8h6xk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ljnw8"]
+resource_name = "Red"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(6.51, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h8ry5"]
+_data = {
+"RESET": SubResource("Animation_8h6xk"),
+"Red": SubResource("Animation_ljnw8")
+}
+
+[sub_resource type="Animation" id="Animation_xja75"]
+resource_name = "Fade_In"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(2.46229, 0.143587),
+"update": 0,
+"values": [Vector2(-159, -50), Vector2(-159, -135)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(2.46229, 0.0853778),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tynok"]
+resource_name = "Fade_Out"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(0.143587, 1),
+"update": 0,
+"values": [Vector2(-159, -135), Vector2(-159, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(0.0853778, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0cdcx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-159, -135)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uo3ib"]
+_data = {
+"Fade_In": SubResource("Animation_xja75"),
+"Fade_Out": SubResource("Animation_tynok"),
+"RESET": SubResource("Animation_0cdcx")
+}
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_5aix3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_sn23d")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_rtwqn")
+autoplay = "default"
+frame_progress = 0.915179
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_o4fq4")
 
 [node name="ZoomingCamera2D" parent="." instance=ExtResource("3_1nekc")]
+position = Vector2(0, -144)
 maxZoomLevel = 1.0
 minZoomLevel = 0.2
+
+[node name="PlayerArea2D" type="Area2D" parent="."]
+script = ExtResource("4_t5py0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_am8eo")
+
+[node name="InteractUI" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = -135.0
+offset_right = 159.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="InteractUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="InteractUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 86.0
+offset_top = -64.0
+offset_right = -86.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InteractLabel2" type="Label" parent="InteractUI/Panel/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 23
+text = "2 Food"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InteractUI/Panel/Panel2/InteractLabel2"]
+libraries = {
+"": SubResource("AnimationLibrary_h8ry5")
+}
+
+[node name="InteractLabel" type="Label" parent="InteractUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 23
+text = "Press 'E' to Grow Human"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InteractUI"]
+libraries = {
+"": SubResource("AnimationLibrary_uo3ib")
+}
+
+[connection signal="area_entered" from="PlayerArea2D" to="PlayerArea2D" method="_on_area_entered"]
+[connection signal="area_exited" from="PlayerArea2D" to="PlayerArea2D" method="_on_area_exited"]
+[connection signal="animation_finished" from="InteractUI/AnimationPlayer" to="PlayerArea2D" method="_on_animation_player_animation_finished"]
 
 [node name="healthbar" type="ProgressBar" parent="."]
 modulate = Color(0, 1, 0, 1)

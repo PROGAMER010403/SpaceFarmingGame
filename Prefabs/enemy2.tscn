@@ -99,7 +99,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_anim",
-"speed": 10.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -125,14 +125,16 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking_anim",
-"speed": 10.0
+"speed": 20.0
 }]
 
 [node name="enemy" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
 collision_layer = 0
 script = ExtResource("1_4h66v")
-speed = 12000
+speed = 10000
 max_health = 50
+damage_to_player = 10
 
 [node name="bullet_detector" type="Area2D" parent="." groups=["enemy-group"]]
 position = Vector2(-3.272, -49)
@@ -155,7 +157,8 @@ modulate = Color(0.5, 1, 0.5, 1)
 position = Vector2(-3.272, -49)
 scale = Vector2(3.233, 3.06736)
 sprite_frames = SubResource("SpriteFrames_x71cu")
-animation = &"attack_anim"
+animation = &"walking_anim"
+frame_progress = 0.240503
 
 [node name="laser_timer" type="Timer" parent="."]
 
@@ -177,6 +180,7 @@ value = 50.0
 show_percentage = false
 
 [connection signal="body_entered" from="bullet_detector" to="." method="_on_bullet_detector_body_entered"]
+[connection signal="area_entered" from="player_detector" to="." method="_on_player_detector_area_entered"]
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]
 [connection signal="body_exited" from="player_detector" to="." method="_on_player_detector_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

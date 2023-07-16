@@ -17,6 +17,10 @@ func _ready():
 	spawnData = fileContents
 
 
+func _process(delta):
+	$CycleLabel.text = "Cycle: " + str(GlobalStatesManager.currentCycleCount)
+
+
 func _on_zoom_in_pressed():
 	GlobalStatesManager.ZOOM_OUT_STATE = false
 
@@ -35,3 +39,35 @@ func _on_spawn_enemies_pressed():
 	RootNode.spawn_enemies(enemy1Spawns, enemy2Spawns, enemy3Spawns, spawnSpacing)
 
 
+func _on_next_cycle_pressed():
+	GlobalStatesManager.currentCycleCount += 1
+	GlobalStatesManager.produce_resources()
+	$CycleLabel.text = "Cycle: " + str(GlobalStatesManager.currentCycleCount)
+	GlobalStatesManager.GoalHUDObject.update_resources()
+
+
+func _on_prev_cycle_pressed():
+	GlobalStatesManager.currentCycleCount -= 1
+	$CycleLabel.text = "Cycle: " + str(GlobalStatesManager.currentCycleCount)
+
+
+func _on_farm_phase_pressed():
+	GlobalStatesManager.PHASE_STATE = 1
+
+
+func _on_build_phase_pressed():
+	GlobalStatesManager.PHASE_STATE = 2
+
+
+func _on_wave_phase_pressed():
+	GlobalStatesManager.PHASE_STATE = 3
+
+
+func _on_add_food_pressed():
+	GlobalStatesManager.currentFoodResource += $AddAmount.value
+	GlobalStatesManager.GoalHUDObject.update_resources()
+
+
+func _on_add_materials_pressed():
+	GlobalStatesManager.currentMaterialsResource += $AddAmount.value
+	GlobalStatesManager.GoalHUDObject.update_resources()

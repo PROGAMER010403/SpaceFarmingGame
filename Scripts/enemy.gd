@@ -23,7 +23,7 @@ func _ready():
 	current_health = max_health
 	
 	if global_position.x <= -3:
-		scale.x = -1
+		scale.x = -1.5
 		$healthbar.scale.x = -1
 
 func _physics_process(delta):
@@ -109,6 +109,8 @@ func _on_player_detector_body_entered(body):
 	
 
 
+
+
 func anim_player():
 	if is_attacking == false and animation_finished == true:
 		$AnimatedSprite2D.play("walking_anim")
@@ -136,3 +138,13 @@ func _on_laser_timer_timeout():
 
 func _on_trap_timer_timeout():
 	speed = speed_s
+
+
+func _on_player_detector_area_entered(area):
+	if area.name == "HumanPodArea2D":
+		area.get_parent().destroyed()
+		queue_free()
+
+
+func _on_tree_exited():
+	GlobalStatesManager.RootNodeObject.check_enemies()
