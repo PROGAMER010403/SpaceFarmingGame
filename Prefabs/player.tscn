@@ -320,6 +320,31 @@ libraries = {
 "": SubResource("AnimationLibrary_uo3ib")
 }
 
+<<<<<<< Updated upstream
+=======
+[node name="healthbar" type="ProgressBar" parent="."]
+modulate = Color(0, 1, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -172.0
+offset_right = 75.0
+offset_bottom = -159.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+show_percentage = false
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-82, 6)
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(79, 1)
+
+>>>>>>> Stashed changes
 [connection signal="area_entered" from="PlayerArea2D" to="PlayerArea2D" method="_on_area_entered"]
 [connection signal="area_exited" from="PlayerArea2D" to="PlayerArea2D" method="_on_area_exited"]
 [connection signal="animation_finished" from="InteractUI/AnimationPlayer" to="PlayerArea2D" method="_on_animation_player_animation_finished"]
