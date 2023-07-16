@@ -244,7 +244,7 @@ position = Vector2(-300, 80)
 POD_STATE = 1
 
 [node name="Player" parent="." instance=ExtResource("1_sjeir")]
-position = Vector2(0, 211)
+position = Vector2(0, 110)
 
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/FarmingModule" to="CanvasLayer/BuildUI" method="_on_farming_module_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/TurretModule1" to="CanvasLayer/BuildUI" method="_on_turret_module_1_pressed"]

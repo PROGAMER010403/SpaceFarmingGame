@@ -11,6 +11,7 @@ var Enemy3Prefab = preload("res://Prefabs/enemy3.tscn")
 
 var isCurrentWaveSpawned : bool = false
 
+
 func _ready():
 	GlobalStatesManager.RootNodeObject = self
 	$CoreModule.MODULE_STATE = 3
@@ -42,7 +43,6 @@ func spawn_enemies(enemy1, enemy2, enemy3, spacing):
 		await get_tree().create_timer(float(spacing)).timeout
 		instantiate_enemy(3, pick_spawn_point())
 	isCurrentWaveSpawned = true
-	
 
 
 func pick_spawn_point():
