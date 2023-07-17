@@ -132,7 +132,8 @@ animations = [{
 scale = Vector2(1.5, 1.5)
 collision_layer = 0
 script = ExtResource("1_6kobv")
-speed = 5000
+speed = 10000
+max_health = 150
 
 [node name="bullet_detector" type="Area2D" parent="." groups=["enemy-group"]]
 position = Vector2(14, -45)

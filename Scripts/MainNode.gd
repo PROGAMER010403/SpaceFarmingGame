@@ -70,7 +70,9 @@ func check_enemies():
 	for i in self.get_children():
 		if i.has_node("bullet_detector"):
 			enemiesInCurrentScene.append(i)
+			print (enemiesInCurrentScene)
 	if enemiesInCurrentScene == [] && isCurrentWaveSpawned == true:
+		print ("yo")
 		GlobalStatesManager.currentCycleCount += 1
 		GlobalStatesManager.currentWavesCount += 1
 		GlobalStatesManager.GoalHUDObject.update_wave_goals()

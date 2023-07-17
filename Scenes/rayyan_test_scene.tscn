@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8njseudfhckb"]
+[gd_scene load_steps=12 format=3 uid="uid://b8njseudfhckb"]
 
 [ext_resource type="Script" path="res://Scripts/MainNode.gd" id="1_7tasb"]
 [ext_resource type="PackedScene" uid="uid://durlojbj3xq6h" path="res://Prefabs/player.tscn" id="1_sjeir"]
+[ext_resource type="Texture2D" uid="uid://cit5q4yw8ach7" path="res://Assets/Sprites/VoidStarrySky.png" id="2_p4wjk"]
 [ext_resource type="PackedScene" uid="uid://di0r7vye68keg" path="res://Prefabs/core_module.tscn" id="2_ucc5e"]
 [ext_resource type="Script" path="res://Scripts/GoalHUD.gd" id="4_jrige"]
 [ext_resource type="Script" path="res://Scripts/BuildUI.gd" id="4_nx73b"]
@@ -18,6 +19,11 @@ bg_color = Color(0.74902, 0, 0.403922, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7tasb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+scale = Vector2(10, 3)
+texture = ExtResource("2_p4wjk")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -258,6 +264,40 @@ vertical_alignment = 1
 [node name="MaterialsLabel" type="Label" parent="CanvasLayer/GoalHUD/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Materials: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameWon" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GameWon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GameWon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "CONGRATULATIONS ANDROID!
+YOU HAVE SUCCESSFULLY REPOPULATED HUMANITY
+
+
+
+NOW TIME TO REPEAT EXPERIMENT.........."
 horizontal_alignment = 1
 vertical_alignment = 1
 

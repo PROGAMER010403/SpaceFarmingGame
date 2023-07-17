@@ -40,6 +40,10 @@ func _process(delta):
 	elif PHASE_STATE == 2:
 		ZOOM_OUT_STATE = false
 
+	if currentHumansCount >= 7 && currentWavesCount >=5:
+		RootNodeObject.get_node("CanvasLayer/GameWon").show()
+		
+
 #Calls relevant function in ZoomingCameraObject based on ZOOM_OUT_STATE
 func update_zoom_state():
 	if ZOOM_OUT_STATE == false:
