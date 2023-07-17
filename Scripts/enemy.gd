@@ -14,7 +14,7 @@ var is_attacking = false
 var lasered = false
 var animation_finished = true
 var speed_s = speed
-
+var player : Object
 
 func _ready():
 	add_to_group("enemies")
@@ -93,6 +93,7 @@ func _on_bullet_detector_body_entered(body):
 		var damageAmount = body.damage_value()
 		damage(damageAmount)
 		print("b")
+		body.queue_free()
 
 
 func _on_timer_timeout():
@@ -104,6 +105,8 @@ func _on_player_detector_body_entered(body):
 		is_attacking = true
 		speed = 0
 		anim_player()
+		player = body
+	
 
 
 
@@ -126,6 +129,7 @@ func _on_player_detector_body_exited(body):
 func _on_animated_sprite_2d_animation_finished():
 	animation_finished = true
 	anim_player()
+	player.android_damage(damage_to_player)
 
 
 func _on_laser_timer_timeout():

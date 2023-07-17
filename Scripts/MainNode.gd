@@ -11,6 +11,7 @@ var Enemy3Prefab = preload("res://Prefabs/enemy3.tscn")
 
 var isCurrentWaveSpawned : bool = false
 
+
 func _ready():
 	GlobalStatesManager.RootNodeObject = self
 	$CoreModule.MODULE_STATE = 3
@@ -22,11 +23,6 @@ func place_module(moduleID):
 	if moduleID == 1:
 		var ModuleInstance = FarmingModulePrefab.instantiate()
 		ModuleInstance.name = "FarmingModule"
-		ModuleInstance.MODULE_STATE = 1
-		add_child(ModuleInstance)
-	elif moduleID == 2:
-		var ModuleInstance = Turret1ModulePrefab.instantiate()
-		ModuleInstance.name = "Turret1Module"
 		ModuleInstance.MODULE_STATE = 1
 		add_child(ModuleInstance)
 
@@ -42,7 +38,6 @@ func spawn_enemies(enemy1, enemy2, enemy3, spacing):
 		await get_tree().create_timer(float(spacing)).timeout
 		instantiate_enemy(3, pick_spawn_point())
 	isCurrentWaveSpawned = true
-	
 
 
 func pick_spawn_point():
@@ -75,8 +70,11 @@ func check_enemies():
 	for i in self.get_children():
 		if i.has_node("bullet_detector"):
 			enemiesInCurrentScene.append(i)
+			print (enemiesInCurrentScene)
 	if enemiesInCurrentScene == [] && isCurrentWaveSpawned == true:
+		print ("yo")
 		GlobalStatesManager.currentCycleCount += 1
 		GlobalStatesManager.currentWavesCount += 1
 		GlobalStatesManager.GoalHUDObject.update_wave_goals()
+		$CanvasLayer/BuildUI/VBoxContainer4.show()
 		isCurrentWaveSpawned == false

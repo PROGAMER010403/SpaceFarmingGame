@@ -125,15 +125,15 @@ animations = [{
 }],
 "loop": true,
 "name": &"walking_anim",
-"speed": 7.0
+"speed": 10.0
 }]
 
 [node name="enemy" type="CharacterBody2D"]
 scale = Vector2(1.5, 1.5)
 collision_layer = 0
 script = ExtResource("1_gkqqm")
-speed = 2500
-max_health = 150
+speed = 5000
+max_health = 250
 damage_to_player = 30
 
 [node name="bullet_detector" type="Area2D" parent="." groups=["enemy-group"]]
@@ -179,6 +179,7 @@ size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
 
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="body_entered" from="bullet_detector" to="." method="_on_bullet_detector_body_entered"]
 [connection signal="area_entered" from="player_detector" to="." method="_on_player_detector_area_entered"]
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]

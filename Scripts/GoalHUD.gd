@@ -9,8 +9,9 @@ extends Control
 
 func _ready():
 	GlobalStatesManager.GoalHUDObject = self
-	GlobalStatesManager.GoalHUDObject.update_human_goals()
-	GlobalStatesManager.GoalHUDObject.update_wave_goals()
+	update_human_goals()
+	update_wave_goals()
+	update_resources()
 
 
 func update_human_goals():

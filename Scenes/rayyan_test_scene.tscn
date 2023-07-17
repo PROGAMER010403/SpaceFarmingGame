@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8njseudfhckb"]
+[gd_scene load_steps=12 format=3 uid="uid://b8njseudfhckb"]
 
 [ext_resource type="Script" path="res://Scripts/MainNode.gd" id="1_7tasb"]
 [ext_resource type="PackedScene" uid="uid://durlojbj3xq6h" path="res://Prefabs/player.tscn" id="1_sjeir"]
+[ext_resource type="Texture2D" uid="uid://cit5q4yw8ach7" path="res://Assets/Sprites/VoidStarrySky.png" id="2_p4wjk"]
 [ext_resource type="PackedScene" uid="uid://di0r7vye68keg" path="res://Prefabs/core_module.tscn" id="2_ucc5e"]
 [ext_resource type="Script" path="res://Scripts/GoalHUD.gd" id="4_jrige"]
 [ext_resource type="Script" path="res://Scripts/BuildUI.gd" id="4_nx73b"]
@@ -19,6 +20,11 @@ bg_color = Color(0.74902, 0, 0.403922, 1)
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7tasb")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+scale = Vector2(10, 3)
+texture = ExtResource("2_p4wjk")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BuildUI" type="Control" parent="CanvasLayer"]
@@ -34,18 +40,60 @@ script = ExtResource("4_nx73b")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BuildUI"]
 layout_mode = 1
-offset_right = 135.0
-offset_bottom = 66.0
+offset_left = -965.0
+offset_top = 503.0
+offset_right = -830.0
+offset_bottom = 580.0
 
 [node name="FarmingModule" type="Button" parent="CanvasLayer/BuildUI/VBoxContainer"]
 layout_mode = 2
-text = "Farming Module"
+text = "Build
+Farming Module
+(3 Materials)"
 
-[node name="TurretModule1" type="Button" parent="CanvasLayer/BuildUI/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/BuildUI"]
+visible = false
+layout_mode = 1
+offset_left = -160.0
+offset_top = 503.0
+offset_right = 141.0
+offset_bottom = 580.0
+
+[node name="FarmPhase" type="Button" parent="CanvasLayer/BuildUI/VBoxContainer2"]
 layout_mode = 2
-text = "Turret Module 1"
+size_flags_vertical = 3
+text = "FARM PHASE ->
+(make sure to build before advancing)"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/BuildUI"]
+visible = false
+layout_mode = 1
+offset_left = -160.0
+offset_top = 503.0
+offset_right = 141.0
+offset_bottom = 580.0
+
+[node name="WavePhase" type="Button" parent="CanvasLayer/BuildUI/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "WAVE PHASE ->
+(make sure to farm before advancing)"
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="CanvasLayer/BuildUI"]
+visible = false
+layout_mode = 1
+offset_left = -160.0
+offset_top = 503.0
+offset_right = 141.0
+offset_bottom = 580.0
+
+[node name="WavePhase" type="Button" parent="CanvasLayer/BuildUI/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "BUILD PHASE ->"
 
 [node name="DebugMenu" type="VBoxContainer" parent="CanvasLayer/BuildUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -219,6 +267,40 @@ text = "Materials: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="GameWon" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/GameWon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/GameWon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "CONGRATULATIONS ANDROID!
+YOU HAVE SUCCESSFULLY REPOPULATED HUMANITY
+
+
+
+NOW TIME TO REPEAT EXPERIMENT.........."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CoreModule" parent="." instance=ExtResource("2_ucc5e")]
 
 [node name="HumanPods" type="Node2D" parent="."]
@@ -244,10 +326,12 @@ position = Vector2(-300, 80)
 POD_STATE = 1
 
 [node name="Player" parent="." instance=ExtResource("1_sjeir")]
-position = Vector2(0, 211)
+position = Vector2(0, 110)
 
 [connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/FarmingModule" to="CanvasLayer/BuildUI" method="_on_farming_module_pressed"]
-[connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer/TurretModule1" to="CanvasLayer/BuildUI" method="_on_turret_module_1_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer2/FarmPhase" to="CanvasLayer/BuildUI" method="_on_next_phase_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer3/WavePhase" to="CanvasLayer/BuildUI" method="_on_spawn_enemies_pressed"]
+[connection signal="pressed" from="CanvasLayer/BuildUI/VBoxContainer4/WavePhase" to="CanvasLayer/BuildUI" method="_on_build_phase_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/ZoomIn" to="CanvasLayer/BuildUI/DebugMenu" method="_on_zoom_in_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/ZoomOut" to="CanvasLayer/BuildUI/DebugMenu" method="_on_zoom_out_pressed"]
 [connection signal="pressed" from="CanvasLayer/BuildUI/DebugMenu/NextCycle" to="CanvasLayer/BuildUI/DebugMenu" method="_on_next_cycle_pressed"]

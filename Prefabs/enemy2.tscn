@@ -132,7 +132,7 @@ animations = [{
 scale = Vector2(1.5, 1.5)
 collision_layer = 0
 script = ExtResource("1_4h66v")
-speed = 10000
+speed = 20000
 max_health = 50
 damage_to_player = 10
 
@@ -179,6 +179,7 @@ size_flags_horizontal = 4
 value = 50.0
 show_percentage = false
 
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="body_entered" from="bullet_detector" to="." method="_on_bullet_detector_body_entered"]
 [connection signal="area_entered" from="player_detector" to="." method="_on_player_detector_area_entered"]
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_detector_body_entered"]

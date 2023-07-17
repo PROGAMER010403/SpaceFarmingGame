@@ -111,6 +111,8 @@ func resolveNotification():
 			isReqsMet = true
 			NotifUIObject.visible = false
 			isFedLastCycle = true
+			GlobalStatesManager.currentFoodResource -= 2
+			GlobalStatesManager.GoalHUDObject.update_resources()
 	elif currentNotifID == 3:
 		NotifUIObject.visible = false
 		POD_STATE = 1
@@ -126,3 +128,4 @@ func resolveNotification():
 			POD_STATE = 1
 			contain_empty()
 			GlobalStatesManager.currentMaterialsResource -= 2 
+			GlobalStatesManager.GoalHUDObject.update_resources()

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Rigidbody2D
 
 
 func bullet():
@@ -6,8 +6,7 @@ func bullet():
 
 
 func _physics_process(delta):
-	velocity.x = 0
-	move_and_slide()
+	pass
 
 
 func damage_value():

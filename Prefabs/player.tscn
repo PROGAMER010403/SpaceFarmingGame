@@ -1,15 +1,100 @@
-[gd_scene load_steps=14 format=3 uid="uid://durlojbj3xq6h"]
+[gd_scene load_steps=26 format=3 uid="uid://durlojbj3xq6h"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_5aix3"]
-[ext_resource type="Texture2D" uid="uid://b0m8nw8kjo73x" path="res://Assets/Sprites/icon.svg" id="2_sn23d"]
+[ext_resource type="Texture2D" uid="uid://1s5ufobnemru" path="res://Assets/Sprite-Sheets/AndroidWalking.png" id="2_evq4i"]
 [ext_resource type="PackedScene" uid="uid://be0bxra4qmnsx" path="res://Prefabs/zooming_camera_2d.tscn" id="3_1nekc"]
 [ext_resource type="Script" path="res://Scripts/PlayerArea2D.gd" id="4_t5py0"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnha1"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxt54"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae1ai"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kep3h"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubtej"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ice7b"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p5qx"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bxkt"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ubkn"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7ih3"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kios2"]
+atlas = ExtResource("2_evq4i")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rtwqn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnha1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxt54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae1ai")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kep3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubtej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ice7b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p5qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bxkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ubkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7ih3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kios2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4fq4"]
-size = Vector2(118, 120)
+size = Vector2(60, 306)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_am8eo"]
-size = Vector2(54, 120)
+size = Vector2(28, 298)
 
 [sub_resource type="Animation" id="Animation_8h6xk"]
 length = 0.001
@@ -143,10 +228,14 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_5aix3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_sn23d")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_rtwqn")
+autoplay = "default"
+frame_progress = 0.915179
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_o4fq4")
 
 [node name="ZoomingCamera2D" parent="." instance=ExtResource("3_1nekc")]
@@ -158,6 +247,7 @@ minZoomLevel = 0.2
 script = ExtResource("4_t5py0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
+position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_am8eo")
 
 [node name="InteractUI" type="Control" parent="."]
@@ -229,6 +319,27 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_uo3ib")
 }
+
+[node name="healthbar" type="ProgressBar" parent="."]
+modulate = Color(0, 1, 0, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -82.0
+offset_top = -185.0
+offset_right = 82.0
+offset_bottom = -164.0
+grow_horizontal = 2
+value = 100.0
+show_percentage = false
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-82, 6)
+rotation = -0.0827874
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(79, 1)
+rotation = -0.0827874
 
 [connection signal="area_entered" from="PlayerArea2D" to="PlayerArea2D" method="_on_area_entered"]
 [connection signal="area_exited" from="PlayerArea2D" to="PlayerArea2D" method="_on_area_exited"]
